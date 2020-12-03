@@ -17,11 +17,14 @@
               <v-icon name="bars" color="#e5e5e5" size="2" />
             </v-toolbar-side-icon>
             <v-spacer class="hidden-md-and-up"></v-spacer>
-            <v-toolbar-title class="mr-4">{{appTitle}}</v-toolbar-title>
-            <v-btn flat class="hidden-sm-and-down">Menu</v-btn>    
+            <router-link to="/">
+                <v-toolbar-title class="mr-4" to="/">{{appTitle}}</v-toolbar-title>
+            </router-link>
+            <v-btn flat class="hidden-sm-and-down" to="/menu">Menu</v-btn>    
+            <v-btn flat class="hidden-sm-and-down ml-2" to="/about">About</v-btn>    
             <v-spacer class="hidden-sm-and-down"></v-spacer>
-            <v-btn flat class="hidden-sm-and-down mr-4">SIGN IN</v-btn>
-            <v-btn color="brown lighten-3" class="hidden-sm-and-down">JOIN</v-btn>
+            <v-btn flat class="hidden-sm-and-down mr-4" to="/sign-in">SIGN IN</v-btn>
+            <v-btn to="/join" color="brown lighten-3" class="hidden-sm-and-down">JOIN</v-btn>
         </v-toolbar>  
     </span>
 </template>
@@ -37,6 +40,7 @@
                 drawer: false, // Side bar
                 items: [ // Items In Side bar
                     { title: 'Menu' },
+                    { title: 'Profile' },
                     { title: 'Sign In' },
                     { title: 'Join' }
                 ]
@@ -49,4 +53,8 @@
 </script>
 
 <style scoped>
+    a {
+        color: white;
+        text-decoration: none;
+    }
 </style>
