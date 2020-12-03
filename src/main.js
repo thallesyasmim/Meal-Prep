@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import App from './App.vue';
 import vuetify from './plugins/vuetify';
+import "vue-awesome/icons/flag";
+import "vue-awesome/icons";
 
 // Router
 import router from './router';
