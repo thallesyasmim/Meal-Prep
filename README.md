@@ -1,5 +1,4 @@
-# vuetify-example
-
+# Meal Prep
 ## Project setup
 ```
 npm install
