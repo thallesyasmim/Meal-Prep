@@ -98,8 +98,8 @@
                         const response = await axios.get('https://api.edamam.com/search', {
                         params: {
                             q: plan,
-                            app_id: 'b1591e41',
-                            app_key: '8e3609cab09515b57325ba81841aa25e',
+                            app_id: process.env.APP_ID,
+                            app_key: process.env.APP_KEY,
                             from: 0,
                             to: 9
                           }
@@ -107,6 +107,7 @@
 
                         const hits = response.data;
                         this.recipes = hits.hits;
+                        console.log(this.recipes);
                    }
                    catch(error) {
                        this.recipes = [];
