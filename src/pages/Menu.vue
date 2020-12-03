@@ -1,14 +1,20 @@
 <template>
-    <v-container fluid>
+    <!-- <v-container fluid>
         <v-layout>
             <h1>Menu</h1>
         </v-layout>
-    </v-container>
+    </v-container> -->
+    <HomePlans />
 </template>
 
 <script>
+    import HomePlans from '../components/HomePlans.vue';
+
     export default {
-        name: 'Menu'   
+        name: 'Menu',
+        components: {
+            HomePlans
+        }   
     }
 </script>
 

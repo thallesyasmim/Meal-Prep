@@ -19,10 +19,13 @@
                            <div>
                                <h3 class="headline md-1 mb-1">Keto</h3>
                                <div>
-                                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam mauris felis, varius rutrum massa a, dignissim ornare dui. Cras eget velit eu dui tristique lobortis sit amet vel tellus.
+                                 The Keto diet is a high-fat, adequate-protein, low-carbohydrate diet. The diet forces the body to burn fats rather than carbohydrates by putting the body into ketosis.
                                </div>
                            </div>
                        </v-card-title>
+                       <v-card-actions v-if="['Menu'].includes($route.name)">
+                        <v-btn outline block color="brown" @click="showRecipes('kateo')" class="white--text mb-1">Select This Plan</v-btn>
+                    </v-card-actions>
                    </v-card>
                 </v-flex> 
 
@@ -32,7 +35,7 @@
                             <v-container fill-height fluid>
                                 <v-layout fill-height>
                                     <v-flex xs12 align-end flexbox>
-                                        <span class="headline white--text">PALEO</span>
+                                        <span class="headline white--text mb-1">PALEO</span>
                                     </v-flex>
                                 </v-layout>
                             </v-container>
@@ -40,10 +43,14 @@
                         <v-card-title primary-title>
                             <div>
                                 <h3 class="headline mb-1">Paleo</h3>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam mauris felis, varius rutrum massa a, dignissim ornare dui. Cras eget velit eu dui tristique lobortis sit amet vel tellus.
+                                <div>The Paleo diet requires the sole or predominant consumption of foods presumed to have been the only foods available to or consumed by humans during the Paleolithic era.
                                 </div>
                             </div>
                         </v-card-title>
+
+                        <v-card-actions v-if="['Menu'].includes($route.name)">
+                            <v-btn outline block color="brown" @click="showRecipes('paleo')" class="white--text mb-1">Select This Plan</v-btn>
+                        </v-card-actions>
                     </v-card>
               </v-flex>
 
@@ -61,10 +68,13 @@
                     <v-card-title primary-title>
                         <div>
                             <h3 class="headline mb-1">Vegan</h3>
-                            <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam mauris felis, varius rutrum massa a, dignissim ornare dui. Cras eget velit eu dui tristique lobortis sit amet vel tellus.
+                            <div>The vegan diet abstains from the use of animal products. The vegan diet does not consume meat, diary products, eggs or any all other animal-derived ingredients.
                             </div>
                         </div>
                     </v-card-title>
+                    <v-card-actions v-if="['Menu'].includes($route.name)">
+                        <v-btn outline block color="brown" class="white--text" @click="showRecipes('vegan')">Select This Plan</v-btn>
+                    </v-card-actions>
                 </v-card>
               </v-flex>
             </v-layout>
@@ -73,8 +83,36 @@
 </template>
 
 |<script>
+    import axios from 'axios';
+
     export default {
-        name: 'HomePlans'
+        name: 'HomePlans',
+        data() {
+            return {
+                recipes: []
+            }
+        },
+        methods: {
+            async showRecipes(plan) {
+                    try {
+                        const response = await axios.get('https://api.edamam.com/search', {
+                        params: {
+                            q: plan,
+                            app_id: 'b1591e41',
+                            app_key: '8e3609cab09515b57325ba81841aa25e',
+                            from: 0,
+                            to: 9
+                          }
+                      });
+
+                        const hits = response.data;
+                        this.recipes = hits.hits;
+                   }
+                   catch(error) {
+                       this.recipes = [];
+                   };
+                }
+        }
     }
 </script>
 
