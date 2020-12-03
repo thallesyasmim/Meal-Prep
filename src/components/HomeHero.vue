@@ -4,16 +4,21 @@
             <div class="display-4 font-weight-black white--text text-xs-center">HEALTHY MEALS</div>
             <div class="display-4 font-weight-black white--text text-xs-center mb-3">FOR YOUR TABLE</div>
             <div class="display-xs font-weight-black white--text text-xs-center">Finally be a foodie at home  with fresh, chef-prepared meals delivered daily to your door.</div>
-            <v-btn x-large elevation="13" class="mt-5 brown darken-4 white--text" d-flex justify-center align-center>
-                Expand More
+            <v-btn fab elevation="13" class="mt-5 brown darken-4 white--text" d-flex justify-center align-center>
+                <v-icon name="angle-down" color="white" scale="1.8" />
             </v-btn>
         </v-layout>
     </v-container>
 </template>
 
 <script>
+    import Icon from 'vue-awesome/components/Icon';
+
     export default {
-        name: 'HomeHero'
+        name: 'HomeHero',
+        components: {
+            'v-icon': Icon
+        }
     }
 </script>
 
