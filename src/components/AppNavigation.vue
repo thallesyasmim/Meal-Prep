@@ -17,7 +17,7 @@
               <v-icon name="bars" color="#e5e5e5" size="2" />
             </v-toolbar-side-icon>
             <v-spacer class="hidden-md-and-up"></v-spacer>
-            <router-link to="/">
+            <router-link style="color: white;" to="/">
                 <v-toolbar-title class="mr-4" to="/">{{appTitle}}</v-toolbar-title>
             </router-link>
             <v-btn flat class="hidden-sm-and-down" to="/menu">Menu</v-btn>    
