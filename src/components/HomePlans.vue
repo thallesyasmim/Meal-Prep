@@ -81,8 +81,8 @@
             <v-layout row wrap class="mt-12" v-if="['Menu'].includes($route.name)"> 
               <v-flex xs12 class="display-2 font-weight-black brown--text text-xs-center my-5">RECIPES</v-flex>
               <v-flex xs12 sm12 md4 
-              v-for="recipe in recipes"
-              v-bind:key="recipe.label"
+              v-for="data of recipes"
+              v-bind:key="data.recipe"
               >
                  <v-card
                     class="mx-auto"
@@ -98,7 +98,7 @@
                                 Headline 5
                             </v-list-item-title>
                             <v-list-item-subtitle>
-                                recipe.label 
+                               {{ data.recipe.label }} 
                             </v-list-item-subtitle>
                     </v-list-item-content>
 
@@ -106,14 +106,17 @@
                     </v-list-item>
 
                     <v-card-actions>
-                    <v-btn
-                        outlined
-                        rounded
-                        text
-                        :to="recipe.url"
-                    >
+                    <a :href="data.recipe.url" target="_blank">
+                        <v-btn
+                            outlined
+                            rounded
+                            text
+                            
+                        >
+              
                         Link
                     </v-btn>
+                        </a>
                     </v-card-actions>
                  </v-card>     
               </v-flex>
@@ -139,8 +142,8 @@
                         const response = await axios.get('https://api.edamam.com/search', {
                         params: {
                             q: plan,
-                            app_id: process.env.APP_ID,
-                            app_key: process.env.APP_KEY,
+                            app_id: process.env.API_ID,
+                            app_key: process.env.API_KEY,
                             from: 0,
                             to: 9
                           }
@@ -149,6 +152,9 @@
                         const hits = response.data;
                         this.recipes = hits.hits;
                         console.log(this.recipes);
+                        for(const data of this.recipes) {
+                            console.log(data.recipe.label);
+                        }
                    }
                    catch(error) {
                        this.recipes = [];
