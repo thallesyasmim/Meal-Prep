@@ -15,11 +15,12 @@
                                 type="email"
                                 v-model="email" 
                                 :rules="emailRules" 
+                                @click="alertHidden"
                                 required>
                             </v-text-field>
                             <v-text-field 
                                 prepend-icon="mdi-lock"
-                                :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                                :append-icon="alert1 ? 'mdi-eye' : 'mdi-eye-off'"
                                 name="password" 
                                 label="Password" 
                                 id="password"
@@ -28,6 +29,7 @@
                                 required 
                                 v-model="password"
                                 :rules="passwordRules"
+                                @click="alertHidden"
                                 @click:append="show1 = !show1"
                                 >
                             </v-text-field>
@@ -38,6 +40,16 @@
                         <v-btn color="brown" :disabled="!valid" @click="submit" class="white--text mb-1 mr-2">Login</v-btn>
                     </v-card-actions>
                 </v-card>
+                 <v-alert
+                    border="right"
+                    colored-border
+                    type="error"
+                    elevation="2"
+                    class="mt-14"
+                    v-if="this.alert !== false"
+                >
+                    Invalid email or password.
+                </v-alert>
             </v-flex>
         </v-layout>
     </v-container>
@@ -53,6 +65,7 @@ export default {
             valid: false,
             email: '',
             password: '',
+            alert: false,
             emailRules: [
                 v => !!v || 'E-mail is required',
                 v => /.+@.+/.test(v) || 'E-mail must be valid'
@@ -68,18 +81,28 @@ export default {
     },
     methods: {
          async submit() {
+             this.alert = false;
             if (this.$refs.form.validate()) {
                 try {
-                    await this.userLogin();
+                    const authentication = await this.userLogin();
+                    console.log(authentication);
                     this.$router.push('welcome');
                 }
                 catch(error) {
-                    console.log(error);
+                    console.log(error.message);
+                    if(!this.alert) {
+                        this.alert = true;
+                    }
                 }
             }
         },
         userLogin() {
-            firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+            return firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+        },
+        alertHidden() {
+            if(this.alert) {
+                this.alert = false;
+            }
         }
     }
 };
