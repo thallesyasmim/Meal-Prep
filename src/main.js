@@ -3,7 +3,7 @@ import App from './App.vue';
 import vuetify from './plugins/vuetify';
 import "vue-awesome/icons/flag";
 import "vue-awesome/icons";
-import './firebase';
+import './firebase'; // Import Firebase
 
 // Router
 import router from './router';
