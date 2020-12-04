@@ -32,6 +32,11 @@ export default new Router({
             path: '/join',
             name: 'Join',
             component: () => import('./pages/Join.vue')
+        },
+        {
+            path: '/welcome',
+            name: 'Welcome',
+            component: () => import('./pages/Welcome.vue')
         }
     ] 
 })
